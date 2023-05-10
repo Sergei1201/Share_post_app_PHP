@@ -5,8 +5,8 @@
 //     {
 //         echo 'Test constructor ran...';
 //     }
-//     // public function about()
-//     // {
-//     //     echo 'About page';
-//     // }
+//     public function test()
+//     {
+//         echo 'Test';
+//     }
 // }

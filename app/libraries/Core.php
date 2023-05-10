@@ -10,45 +10,50 @@ class Core
     protected $currentMethod = 'index';
     protected $params = [];
 
-    // Create constructor
+    // Create a constructor
     public function __construct()
     {
         $url = $this->getUrl();
-        /* Look in the controllers folder to figure out if there's a controller that matches the controller 
-        from the URL
-        If there's a match set it as a current controller */
+        // Check if there's a controller in the controllers folder that matches our URL
         if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+            // If the file exists, set the controller from the file as a default
             $this->currentController = ucwords($url[0]);
-            // Unset the zero index
+            // Unset the zero index 
             unset($url[0]);
         }
-
-        // Instantiate a new controller class
+        // Require controller
         require_once '../app/controllers/' . $this->currentController . '.php';
+        // Instantiate controller class by creating a new object
         $this->currentController = new $this->currentController;
 
-        // Get a method, the second argument of the $url array
-        if (method_exists($this->currentController, $url[1])) {
-            $this->currentMethod = $url[1];
-            unset($url[1]);
+        // Check if a method is set and exists in the class
+        if (isset($url[1])) {
+            if (method_exists($this->currentController, $url[1])) {
+                // If the method exists, set it as a default
+                $this->currentMethod = $url[1];
+                // Unset the first index
+                unset($url[1]);
+            }
         }
 
-        // Get params
+        // Handle URL params
         $this->params = $url ? array_values($url) : [];
-        // Call a callback with URL of params
+        // Callback function
         call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 
-    // Get URL
+    // GetUrl method
     public function getUrl()
-    {
-        // Strip slashes from the URL
-        $url = rtrim($_GET['url'], '/');
-        // Sanitize the URL
-        $url = filter_var($url, FILTER_SANITIZE_URL);
-        // Turn the URL into an array
-        $url = explode('/', $url);
-        // Return the URL
-        return $url;
+    {   // Check if the URL is set
+        if (isset($_GET['url'])) {
+            // Strip slashes from the URL
+            $url = rtrim($_GET['url']);
+            // Sanitize the URL
+            $url = filter_var($url, FILTER_SANITIZE_URL);
+            // Turn the URL into an associative array to use it in our app
+            $url = explode('/', $url);
+            // Return the URL (array)
+            return $url;
+        }
     }
 }
