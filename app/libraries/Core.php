@@ -15,12 +15,15 @@ class Core
     {
         $url = $this->getUrl();
         // Check if there's a controller in the controllers folder that matches our URL
-        if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
-            // If the file exists, set the controller from the file as a default
-            $this->currentController = ucwords($url[0]);
-            // Unset the zero index 
-            unset($url[0]);
+        if (isset($url[0])) {
+            if (file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
+                // If the file exists, set the controller from the file as a default
+                $this->currentController = ucwords($url[0]);
+                // Unset the zero index 
+                unset($url[0]);
+            }
         }
+
         // Require controller
         require_once '../app/controllers/' . $this->currentController . '.php';
         // Instantiate controller class by creating a new object
