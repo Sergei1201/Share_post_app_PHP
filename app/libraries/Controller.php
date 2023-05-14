@@ -10,7 +10,7 @@ class Controller
         // Require a model from a file
         require_once '../app/models/' . $model . '.php';
         // Instantiate a new model class / create a new object
-        return new $model;
+        return new $model();
     }
 
     // Load a view
