@@ -1,10 +1,10 @@
 <?php
 class Pages extends Controller
 {
-    private $postModel;
+    private $modelPost;
     public function __construct()
     {
-        $this->postModel = $this->model('Post');
+        $this->modelPost = $this->model('Post');
     }
     public function index()
     {

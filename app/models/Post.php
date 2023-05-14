@@ -3,7 +3,7 @@ class Post
 {
     private $db;
 
-    // Create a constructor 
+    // Constructor
     public function __construct()
     {
         $this->db = new Database;
