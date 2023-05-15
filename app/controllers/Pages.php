@@ -1,14 +1,22 @@
 <?php
 class Pages extends Controller
 {
-    private $modelPost;
+    private $userModel;
     public function __construct()
     {
-        $this->modelPost = $this->model('Post');
+        $this->userModel = $this->model('User');
     }
+
     public function index()
     {
-        $data = ['Title' => 'Welcome'];
+        $users = $this->userModel->getUsers();
+        $data = [
+
+            'Title' => 'Welcome',
+            'Users' => $users
+
+
+        ];
         $this->view('pages/index', $data);
     }
     public function about()
