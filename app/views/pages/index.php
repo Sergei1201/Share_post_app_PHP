@@ -1,12 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php' ?>
-<h1> <?php echo $data['Title'] ?> </h1>
-<ul>
-    <?php foreach ($data['Users'] as $user) : ?>
-        <li>
-            <?php echo $user->name ?>
-        </li>
-    <?php endforeach ?>
-</ul>
+<div class="jumbotron jumbotron-fluid text-center">
+    <div class="container">
+        <h1 class="display-3"> <?php echo $data['Title'] ?> </h1>
+        <p class="lead"><?php echo $data['Description'] ?></p>
+    </div>
+</div>
+
 
 
 

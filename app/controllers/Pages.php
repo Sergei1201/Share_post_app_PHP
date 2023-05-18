@@ -1,19 +1,16 @@
 <?php
 class Pages extends Controller
 {
-    private $userModel;
     public function __construct()
     {
-        $this->userModel = $this->model('User');
     }
 
     public function index()
     {
-        $users = $this->userModel->getUsers();
         $data = [
 
-            'Title' => 'Welcome',
-            'Users' => $users
+            'Title' => 'Shared Posts',
+            'Description' => 'A basic social media app created with a custom PHP framework'
 
 
         ];
@@ -21,7 +18,10 @@ class Pages extends Controller
     }
     public function about()
     {
-        $data = ['Title' => 'About'];
+        $data = [
+            'Title' => 'About',
+            'Description' => 'This application was created to share posts with the help of this custom PHP framework'
+        ];
         $this->view('pages/about', $data);
     }
 }
